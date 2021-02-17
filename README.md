@@ -7,7 +7,7 @@
 ***
 ***
 *** To avoid retyping too much info. Do a search and replace for the following:
-*** iOS, /repo/ (with /repo-name/)
+*** iOS, / (with -name/)
 -->
 
 
@@ -127,16 +127,16 @@ Project Link: [https://github.com/RestedHub/iOS](https://github.com/RestedHub/iO
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/RestedHub/iOS/repo.svg?style=flat-square
-[contributors-url]: https://github.com/RestedHub/iOS/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/RestedHub/iOS/repo.svg?style=flat-square
-[forks-url]: https://github.com/RestedHub/iOS/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/RestedHub/iOS/repo.svg?style=flat-square
-[stars-url]: https://github.com/RestedHub/iOS/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/RestedHub/iOS/repo.svg?style=flat-square
-[issues-url]: https://github.com/RestedHub/iOS/repo/issues
-[license-shield]: https://img.shields.io/github/license/RestedHub/iOS/repo.svg?style=flat-square
-[license-url]: https://github.com/RestedHub/iOS/repo/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/RestedHub/iOS.svg?style=flat-square
+[contributors-url]: https://github.com/RestedHub/iOS/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/RestedHub/iOS.svg?style=flat-square
+[forks-url]: https://github.com/RestedHub/iOS/network/members
+[stars-shield]: https://img.shields.io/github/stars/RestedHub/iOS.svg?style=flat-square
+[stars-url]: https://github.com/RestedHub/iOS/stargazers
+[issues-shield]: https://img.shields.io/github/issues/RestedHub/iOS.svg?style=flat-square
+[issues-url]: https://github.com/RestedHub/iOS/issues
+[license-shield]: https://img.shields.io/github/license/RestedHub/iOS.svg?style=flat-square
+[license-url]: https://github.com/RestedHub/iOS/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/RestedHub
 [product-screenshot]: images/screenshot.png
