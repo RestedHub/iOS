@@ -2,10 +2,18 @@
     @testable import RestHub
 
     final class RestHubTests: XCTestCase {
-        func testExample() {
-            // This is an example of a functional test case.
-            // Use XCTAssert and related functions to verify your tests produce the correct
-            // results.
-            XCTAssertEqual(RestHub().text, "Hello, World!")
+        func testCanGetUser() {
+            let expectation = self.expectation(description: "getFroggomad")
+            let hub = RestHub()
+            hub.getUser("froggomad") { (result) in
+                defer { expectation.fulfill() }
+                switch result {
+                case .success(let user):
+                    XCTAssertNotNil(user)
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
+                }
+            }
+            wait(for: [expectation], timeout: 10.0)
         }
     }

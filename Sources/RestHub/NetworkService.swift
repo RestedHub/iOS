@@ -76,9 +76,10 @@ class NetworkService {
         let request: URLRequest?
         let error: Error?
     }
-    
+    // MARK: - Properties -
     ///used to switch between live and Mock Data
     var dataLoader: NetworkLoader
+    static let baseURL = URL(string: "https://api.github.com")!
     
     //MARK: - Init -
     ///defaults to URLSession implementation
@@ -98,15 +99,12 @@ class NetworkService {
      Create a request given a URL and requestMethod (GET, POST, CREATE, etc...)
      */
     func createRequest(
-        url: URL?, method: HttpMethod,
+        url: URL, method: HttpMethod,
         headerType: HttpHeaderType? = nil,
         headerValue: HttpHeaderValue? = nil
     ) -> URLRequest? {
-        guard let requestUrl = url else {
-            NSLog("request URL is nil")
-            return nil
-        }
-        var request = URLRequest(url: requestUrl)
+        
+        var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         if let headerType = headerType,
            let headerValue = headerValue {
@@ -167,36 +165,45 @@ class NetworkService {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         
-        let status = encode(from: body, request: request)
-        if let error = status.error {
-            print("Error encoding request: \(error)")
-            completion(.failure(NetworkError.encodingError(associatedError: error)))
-            return
-        }
-        
-        guard let encodedRequest = status.request else {
-            completion(.failure(NetworkError.unknown))
-            return
-        }
-        
-        dataLoader.loadData(using: encodedRequest) { data, response, error in
-            if response?.statusCode ?? 404 >= 400 {
-                print("bad status code: \(response)")
+        if method == .post {
+            let status = encode(from: body, request: request)
+            if let error = status.error {
+                print("Error encoding request: \(error)")
+                completion(.failure(NetworkError.encodingError(associatedError: error)))
+                return
             }
             
-            guard let data = data else { return }
-            let decoder = JSONDecoder()
-            do {
-                let decodedData = try decoder.decode(T.self, from: data)
-                completion(.success(decodedData))
-            } catch {
-                completion(.failure(NetworkError.decodingError(associatedError: error)))
+            guard let encodedRequest = status.request else {
+                completion(.failure(NetworkError.unknown))
+                return
             }
+            request = encodedRequest
         }
-        
+            
+            dataLoader.loadData(using: request) { data, response, error in
+                if response?.statusCode ?? 404 >= 400 {
+                    print("bad status code: \(response)")
+                }
+                
+                guard let data = data else { return }
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                
+                if #available(iOS 10.0, *) {
+                    decoder.dateDecodingStrategy = .iso8601
+                }
+                
+                do {
+                    let decodedData = try decoder.decode(T.self, from: data)
+                    completion(.success(decodedData))
+                } catch {
+                    print(String(data: data, encoding: .utf8))
+                    completion(.failure(NetworkError.decodingError(associatedError: error)))
+                }
+            }
+            
+        }
     }
-    
-}
 
 
 
