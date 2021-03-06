@@ -32,7 +32,7 @@ public struct User: Codable {
     let blog: URL
     let location: String
     let email: String?
-    let hireable: Bool
+    let hireable: Bool?
     let bio: String
     let twitterUsername: String?
     let numPublicRepos: Int
