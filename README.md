@@ -87,10 +87,10 @@ and
 ## Usage
 
 Use RestedHub to interact with the GitHub REST API without writing a bunch of boilerplate code.
-
+```swift
 let gitHubRestController = RestedHub()
-gitHubRestController.login(with: "username", password: "password")
-
+gitHubRestController.getUser("froggomad")
+```
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- ROADMAP -->
