@@ -33,12 +33,12 @@ public struct User: Codable {
     let location: String
     let email: String?
     let hireable: Bool?
-    let bio: String
+    let bio: String?
     let twitterUsername: String?
-    let numPublicRepos: Int
-    let numPublicGists: Int
-    let numFollowers: Int
-    let numFollowing: Int
+    let numPublicRepos: Int?
+    let numPublicGists: Int?
+    let numFollowers: Int?
+    let numFollowing: Int?
     let createdAt: Date
     let updatedAt: Date
     
