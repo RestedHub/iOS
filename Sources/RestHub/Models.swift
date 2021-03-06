@@ -27,10 +27,10 @@ public struct User: Codable {
     let receivedEventsUrl: URL
     let type: String
     let siteAdmin: Bool
-    let name: String
-    let company: String
-    let blog: URL
-    let location: String
+    let name: String?
+    let company: String?
+    let blog: URL?
+    let location: String?
     let email: String?
     let hireable: Bool?
     let bio: String?
