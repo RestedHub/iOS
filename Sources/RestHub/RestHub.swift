@@ -3,7 +3,7 @@ import Foundation
 open class RestHub {
     // MARK: - Properties -
     private var networkService = NetworkService()
-    
+    public init() { }
     
     // MARK: - GET -
     open func getUser(_ username: String, completion: @escaping (Result<User?, Error>) -> Void) {
