@@ -188,10 +188,7 @@ class NetworkService {
                 guard let data = data else { return }
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
-                if #available(iOS 10.0, *) {
-                    decoder.dateDecodingStrategy = .iso8601
-                }
+                decoder.dateDecodingStrategy = .iso8601
                 
                 do {
                     let decodedData = try decoder.decode(T.self, from: data)

@@ -7,6 +7,9 @@ open class RestHub {
     
     // MARK: - GET -
     open func getUser(_ username: String, completion: @escaping (Result<User?, Error>) -> Void) {
-        networkService.decodeCodableRequest(T: User.self, with: URL(string: "https://api.github.com/users/\(username)")!, method: .get, body: nil, completion: completion)
+        let userUrl = NetworkService.baseURL
+        networkService.decodeCodableRequest(T: User.self, with: userUrl.appendingPathComponent(username), method: .get, body: nil, completion: completion)
     }
+    
+    
 }
