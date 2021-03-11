@@ -9,38 +9,38 @@ import Foundation
 
 public struct User: Codable, Equatable {
     
-    let username: String
-    let id: Int
-    let nodeId: String
-    let avatarUrl: URL?
-    let gravatarId: String
-    let url: URL
-    let htmlUrl: URL
-    let followersUrl: URL
-    let followingUrl: String
-    let gistsUrl: String
-    let starredUrl: String
-    let subscriptionsUrl: URL
-    let organizationsUrl: URL
-    let reposUrl: URL
-    let eventsUrl: String
-    let receivedEventsUrl: URL
-    let type: String
-    let siteAdmin: Bool
-    let name: String?
-    let company: String?
-    let blog: URL?
-    let location: String?
-    let email: String?
-    let hireable: Bool?
-    let bio: String?
-    let twitterUsername: String?
-    let numPublicRepos: Int?
-    let numPublicGists: Int?
-    let numFollowers: Int?
-    let numFollowing: Int?
-    let createdAt: Date
-    let updatedAt: Date
+   public let username: String
+   public let id: Int
+   public let nodeId: String
+   public let avatarUrl: URL?
+   public let gravatarId: String
+   public let url: URL
+   public let htmlUrl: URL
+   public let followersUrl: URL
+   public let followingUrl: String
+   public let gistsUrl: String
+   public let starredUrl: String
+   public let subscriptionsUrl: URL
+   public let organizationsUrl: URL
+   public let reposUrl: URL
+   public let eventsUrl: String
+   public let receivedEventsUrl: URL
+   public let type: String
+   public let siteAdmin: Bool
+   public let name: String?
+   public let company: String?
+   public let blog: URL?
+   public let location: String?
+   public let email: String?
+   public let hireable: Bool?
+   public let bio: String?
+   public let twitterUsername: String?
+   public let numPublicRepos: Int?
+   public let numPublicGists: Int?
+   public let numFollowers: Int?
+   public let numFollowing: Int?
+   public let createdAt: Date
+   public let updatedAt: Date
     
     enum CodingKeys: String, CodingKey {
         case username = "login"
@@ -75,8 +75,6 @@ public struct User: Codable, Equatable {
         case numPublicGists = "publicGists"
         case numFollowers = "followers"
         case numFollowing = "following"
-        //          "created_at": "2017-04-26T05:12:36Z",
-        //          "updated_at": "2021-03-02T05:15:51Z"
         case createdAt
         case updatedAt
     }
