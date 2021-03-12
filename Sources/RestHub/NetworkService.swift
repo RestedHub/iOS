@@ -33,8 +33,8 @@ protocol NetworkLoader {
 extension URLSession: NetworkLoader {
     func loadData(using request: URLRequest, with completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         self.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print("Networking error with \(String(describing: request.url?.absoluteString)) \n\(error)")
+            if let error = error as? NetworkError {
+                print("Networking error with \(String(describing: request.url?.absoluteString)) \n\(error.description)")
             }
             
             completion(data, response as? HTTPURLResponse, error)
@@ -74,7 +74,7 @@ class NetworkService {
      */
     struct EncodingStatus {
         let request: URLRequest?
-        let error: Error?
+        let error: NetworkError?
     }
     // MARK: - Properties -
     ///used to switch between live and Mock Data
@@ -136,7 +136,8 @@ class NetworkService {
             request.httpBody = try jsonEncoder.encode(type)
         } catch {
             print("Error encoding object into JSON \(error)")
-            return EncodingStatus(request: nil, error: error)
+            let networkError = NetworkError.encodingError(associatedError: error)
+            return EncodingStatus(request: nil, error: networkError)
         }
         
         return EncodingStatus(request: request, error: nil)
@@ -195,6 +196,7 @@ class NetworkService {
                     completion(.success(decodedData))
                 } catch {
                     print(String(data: data, encoding: .utf8))
+                    print("decoding error: \(error)")
                     completion(.failure(NetworkError.decodingError(associatedError: error)))
                 }
             }

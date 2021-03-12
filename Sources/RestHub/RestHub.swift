@@ -11,5 +11,14 @@ open class RestHub {
         networkService.decodeCodableRequest(T: User.self, with: userUrl.appendingPathComponent(username), method: .get, body: nil, completion: completion)
     }
     
+    open func listRepos(_ username: String, completion: @escaping (Result<[Repo]?, Error>) -> Void) {
+        let reposUrl = NetworkService.baseURL
+            .appendingPathComponent("users")
+            .appendingPathComponent(username)
+            .appendingPathComponent("repos")
+        
+        networkService.decodeCodableRequest(T: [Repo].self, with: reposUrl, method: .get, body: nil, completion: completion)
+    }
+    
     
 }
