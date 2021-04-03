@@ -80,7 +80,7 @@ public struct User: Codable, Equatable {
     }
 
 }
-        
+// MARK: - Repo -
 public struct Repo: Codable {
     public let id: Int
     public let nodeId: String
@@ -150,7 +150,6 @@ public struct Repo: Codable {
     public let archived: Bool
     public let disabled: Bool
     public let openIssuesCount: Int
-    // need License type
     public let license: License?
     public let forks: Int
     public let openIssues: Int
@@ -158,10 +157,11 @@ public struct Repo: Codable {
     public let defaultBranch: String
 }
 
+// MARK: - License -
 public struct License: Codable {
     public let key: String
     public let name: String
     public let spdxId: String
-    public let url: URL
+    public let url: URL?
     public let nodeId: String    
 }
