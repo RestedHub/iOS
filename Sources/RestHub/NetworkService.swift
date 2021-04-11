@@ -120,11 +120,11 @@ class NetworkService {
                               method: HttpMethod,
                               headerType: HttpHeaderType? = nil,
                               headerValue: HttpHeaderValue? = nil,
-                              visibility: RepoVisibility = .private,
                               sortBy: SortBy,
                               sortOrder: SortDirection,
                               perPage: Int = 100,
-                              page: Int = 1
+                              page: Int = 1,
+                              visibility: RepoVisibility = .private
     ) -> URLRequest? {
         guard var request = createRequest(url: url, method: method, headerType: headerType, headerValue: headerValue) else { return nil }
         
@@ -188,12 +188,12 @@ class NetworkService {
         }
     }
     
-    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, sortBy: SortBy? = nil, sortOrder: SortDirection? = nil, perPage: Int = 100, page: Int = 1, visibility: RepoVisibility? = .private, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
+    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, sortBy: SortBy? = nil, sortOrder: SortDirection? = nil, perPage: Int = 100, page: Int = 1, visibility: RepoVisibility = .private, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
         var request: URLRequest
         
         if let sortBy = sortBy,
            let sortOrder = sortOrder {
-            guard let sortRequest = createSortedRequest(url: url, method: method, sortBy: sortBy, sortOrder: sortOrder) else {
+            guard let sortRequest = createSortedRequest(url: url, method: method, sortBy: sortBy, sortOrder: sortOrder, perPage: perPage, page: page, visibility: visibility) else {
                 return
             }
             request = sortRequest
