@@ -13,7 +13,8 @@ open class RestHub {
     
     open func getUser(withOAuthToken token: String, completion: @escaping (Result<User?, Error>) -> Void) {
         let userUrl = NetworkService.baseURL.appendingPathComponent("user")
-        var components = URLComponents()
+        var components = URLComponents(string: userUrl.absoluteString)!
+        
         let tokenQuery = URLQueryItem(name: "access_token", value: token)
         components.queryItems = [tokenQuery]
         guard let url = components.url else {
