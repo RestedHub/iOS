@@ -49,5 +49,5 @@ public enum RepoType: String {
 }
 
 public enum RepoVisibility: String {
-    case `public`, `private`
+    case all, `public` = "public", `private` = "private"
 }

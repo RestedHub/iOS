@@ -188,7 +188,7 @@ class NetworkService {
         }
     }
     
-    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, sortBy: SortBy? = nil, sortOrder: SortDirection? = nil, perPage: Int = 100, page: Int = 1, visibility: RepoVisibility? = nil, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
+    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, sortBy: SortBy? = nil, sortOrder: SortDirection? = nil, perPage: Int = 100, page: Int = 1, visibility: RepoVisibility? = .private, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
         var request: URLRequest
         
         if let sortBy = sortBy,
