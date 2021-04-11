@@ -26,7 +26,7 @@ open class RestHub {
         networkService.decodeCodableRequest(T: [Repo].self, with: reposUrl, method: .get, body: nil, completion: completion)
     }
     
-    open func listRepos(for username: String, withOAuthToken token: String, completion: @escaping(Result<[Repo]?, Error>) -> Void) {
+    open func listRepos(for username: String, withOAuthToken token: String, sort: SortBy? = nil, direction: SortDirection? = nil, perPage: Int = 100, type: RepoType, completion: @escaping(Result<[Repo]?, Error>) -> Void) {
         let reposUrl = NetworkService.baseURL
             .appendingPathComponent("users")
             .appendingPathComponent(username)
@@ -34,6 +34,17 @@ open class RestHub {
         
         networkService.decodeCodableRequest(T: [Repo].self, with: reposUrl, token: token, method: .get, body: nil, completion: completion)
     }
-    
-    
+}
+
+public enum SortBy: String {
+    case created, updated, pushed,
+         fullName = "full_name"
+}
+
+public enum SortDirection: String {
+    case asc, desc
+}
+
+public enum RepoType: String {
+    case all, owner, member
 }

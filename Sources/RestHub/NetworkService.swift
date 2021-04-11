@@ -116,6 +116,27 @@ class NetworkService {
         return request
     }
     
+    func createSortedRequest(url: URL,
+                              method: HttpMethod,
+                              headerType: HttpHeaderType? = nil,
+                              headerValue: HttpHeaderValue? = nil,
+                              sortBy: SortBy,
+                              sortOrder: SortDirection,
+                              perPage: Int = 100,
+                              page: Int = 1
+    ) -> URLRequest? {
+        guard var request = createRequest(url: url, method: method, headerType: headerType, headerValue: headerValue) else { return nil }
+        
+        var components = URLComponents(string: url.absoluteString)!
+        let sortByItem = URLQueryItem(name: "sort", value: sortBy.rawValue)
+        let sortOrderItem = URLQueryItem(name: "sortOrder", value: sortOrder.rawValue)
+        let perPageItem = URLQueryItem(name: "per_page", value: String(perPage))
+        let pageItem = URLQueryItem(name: "page", value: String(page))
+        components.queryItems = [sortByItem, sortOrderItem, perPageItem, pageItem]
+        request.url = components.url
+        return request
+    }
+    
     /**
      Encode from a Swift object to JSON for transmitting to an endpoint
      - parameter type: the type to be encoded (i.e. MyCustomType.self)
@@ -165,8 +186,18 @@ class NetworkService {
         }
     }
     
-    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
-        var request = URLRequest(url: url)
+    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, sortBy: SortBy? = nil, sortOrder: SortDirection? = nil, perPage: Int = 100, page: Int = 1,  method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
+        var request: URLRequest
+        
+        if let sortBy = sortBy,
+           let sortOrder = sortOrder {
+            guard let sortRequest = createSortedRequest(url: url, method: method, sortBy: sortBy, sortOrder: sortOrder) else {
+                return
+            }
+            request = sortRequest
+        } else {
+            request = URLRequest(url: url)
+        }
         request.httpMethod = method.rawValue
         
         if let token = token {
