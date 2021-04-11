@@ -47,3 +47,7 @@ public enum SortDirection: String {
 public enum RepoType: String {
     case all, owner, member
 }
+
+public enum RepoVisibility: String {
+    case `public`, `private`
+}

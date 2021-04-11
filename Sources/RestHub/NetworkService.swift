@@ -120,6 +120,7 @@ class NetworkService {
                               method: HttpMethod,
                               headerType: HttpHeaderType? = nil,
                               headerValue: HttpHeaderValue? = nil,
+                              visibility: RepoVisibility = .private,
                               sortBy: SortBy,
                               sortOrder: SortDirection,
                               perPage: Int = 100,
@@ -132,7 +133,8 @@ class NetworkService {
         let sortOrderItem = URLQueryItem(name: "sortOrder", value: sortOrder.rawValue)
         let perPageItem = URLQueryItem(name: "per_page", value: String(perPage))
         let pageItem = URLQueryItem(name: "page", value: String(page))
-        components.queryItems = [sortByItem, sortOrderItem, perPageItem, pageItem]
+        let visibilityItem = URLQueryItem(name: "visibility", value: visibility.rawValue)
+        components.queryItems = [sortByItem, sortOrderItem, perPageItem, pageItem, visibilityItem]
         request.url = components.url
         return request
     }
@@ -186,7 +188,7 @@ class NetworkService {
         }
     }
     
-    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, sortBy: SortBy? = nil, sortOrder: SortDirection? = nil, perPage: Int = 100, page: Int = 1,  method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
+    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, sortBy: SortBy? = nil, sortOrder: SortDirection? = nil, perPage: Int = 100, page: Int = 1, visibility: RepoVisibility? = nil, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
         var request: URLRequest
         
         if let sortBy = sortBy,
