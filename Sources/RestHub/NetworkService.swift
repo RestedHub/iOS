@@ -165,9 +165,13 @@ class NetworkService {
         }
     }
     
-    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
+    func decodeCodableRequest<T: Codable>(T: T.Type, with url: URL, token: String? = nil, method: HttpMethod = .post, body: T?, completion: @escaping (Result<T?, Error>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+        
+        if let token = token {
+            request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
+        }
         
         if method == .post {
             let status = encode(from: body, request: request)
