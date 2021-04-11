@@ -28,8 +28,7 @@ open class RestHub {
     
     open func listRepos(for username: String, withOAuthToken token: String, sort: SortBy = .updated, direction: SortDirection = .desc, perPage: Int = 100, page: Int = 1, type: RepoType = .all, completion: @escaping(Result<[Repo]?, Error>) -> Void) {
         let reposUrl = NetworkService.baseURL
-            .appendingPathComponent("users")
-            .appendingPathComponent(username)
+            .appendingPathComponent("user")
             .appendingPathComponent("repos")
         
         networkService.decodeCodableRequest(T: [Repo].self, with: reposUrl, token: token, sortBy: sort, sortOrder: direction, perPage: perPage, page: page, method: .get, body: nil, completion: completion)
