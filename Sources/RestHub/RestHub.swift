@@ -31,7 +31,7 @@ open class RestHub {
                 return
             }
             completion(.success(user))
-        }
+        }.resume()
     }
     
     open func listRepos(_ username: String, completion: @escaping (Result<[Repo]?, Error>) -> Void) {
