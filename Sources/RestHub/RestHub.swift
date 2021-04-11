@@ -15,7 +15,7 @@ open class RestHub {
         let userUrl = NetworkService.baseURL.appendingPathComponent("user")
         //TODO: Refactor NetworkService
         var request = URLRequest(url: userUrl)
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))
