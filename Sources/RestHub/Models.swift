@@ -9,24 +9,24 @@ import Foundation
 
 public struct User: Codable, Equatable {
     
-   public let username: String
-   public let id: Int
-   public let nodeId: String
+   public let username: String?
+   public let id: Int?
+   public let nodeId: String?
    public let avatarUrl: URL?
-   public let gravatarId: String
-   public let url: URL
-   public let htmlUrl: URL
-   public let followersUrl: URL
-   public let followingUrl: String
-   public let gistsUrl: String
-   public let starredUrl: String
-   public let subscriptionsUrl: URL
-   public let organizationsUrl: URL
-   public let reposUrl: URL
-   public let eventsUrl: String
-   public let receivedEventsUrl: URL
-   public let type: String
-   public let siteAdmin: Bool
+   public let gravatarId: String?
+   public let url: URL?
+   public let htmlUrl: URL?
+   public let followersUrl: URL?
+   public let followingUrl: String?
+   public let gistsUrl: String?
+   public let starredUrl: String?
+   public let subscriptionsUrl: URL?
+   public let organizationsUrl: URL?
+   public let reposUrl: URL?
+   public let eventsUrl: String?
+   public let receivedEventsUrl: URL?
+   public let type: String?
+   public let siteAdmin: Bool?
    public let name: String?
    public let company: String?
    public let blog: URL?
