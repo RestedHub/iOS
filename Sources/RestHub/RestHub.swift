@@ -31,7 +31,7 @@ open class RestHub {
             .appendingPathComponent("user")
             .appendingPathComponent("repos")
         
-        networkService.decodeCodableRequest(T: [Repo].self, with: reposUrl, token: token, sortBy: sort, sortOrder: direction, perPage: perPage, page: page, method: .get, body: nil, completion: completion)
+        networkService.decodeCodableRequest(T: [Repo].self, with: reposUrl, token: token, sortBy: sort, sortOrder: direction, perPage: perPage, page: page, visibility: visibility, method: .get, body: nil, completion: completion)
     }
 }
 
