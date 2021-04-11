@@ -27,7 +27,8 @@ open class RestHub {
             }
             
             guard let user = self.networkService.decode(to: User.self, data: data) else {
-                completion(.failure(error))
+                let authError = NSError(domain: "AuthError", code: (response as? HTTPURLResponse)?.statusCode ?? 400, userInfo: ["NSLocalizedDescriptionKey" : String(data: data, encoding: .utf8)])
+                completion(.failure(authError))
                 return
             }
             completion(.success(user))
