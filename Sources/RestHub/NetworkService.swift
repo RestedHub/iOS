@@ -8,6 +8,7 @@ import Foundation
 
 enum NetworkError: Error {
     case unknown
+    case badURL
     case encodingError(associatedError: Error)
     case decodingError(associatedError: Error)
     
@@ -17,6 +18,8 @@ enum NetworkError: Error {
             return error.localizedDescription
         case.decodingError(associatedError: let error):
             return error.localizedDescription
+        case .badURL:
+            return NSLocalizedString("Unable to create URL", comment: "Networking Error")
         case .unknown:
             return NSLocalizedString("An unknown error occurred", comment: "Networking Error")
         }

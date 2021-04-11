@@ -11,6 +11,18 @@ open class RestHub {
         networkService.decodeCodableRequest(T: User.self, with: userUrl.appendingPathComponent(username), method: .get, body: nil, completion: completion)
     }
     
+    open func getUser(withOAuthToken token: String, completion: @escaping (Result<User?, Error>) -> Void) {
+        let userUrl = NetworkService.baseURL.appendingPathComponent("user")
+        var components = URLComponents()
+        let tokenQuery = URLQueryItem(name: "access_token", value: token)
+        components.queryItems = [tokenQuery]
+        guard let url = components.url else {
+            completion(.failure(NetworkError.unknown))
+            return
+        }
+        networkService.decodeCodableRequest(T: User.self, with: url, method: .get, body: nil, completion: completion)
+    }
+    
     open func listRepos(_ username: String, completion: @escaping (Result<[Repo]?, Error>) -> Void) {
         let reposUrl = NetworkService.baseURL
             .appendingPathComponent("users")
