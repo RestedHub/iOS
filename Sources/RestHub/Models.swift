@@ -89,7 +89,7 @@ public struct Repo: Codable {
     public let owner: User?
     /// public URL
     public let htmlUrl: String?
-    public let description: String?
+    public let repoDescription: String?
     public let fork: Bool?
     /// API URL
     public let url: URL?
@@ -155,6 +155,82 @@ public struct Repo: Codable {
     public let openIssues: Int?
     public let watchers: Int?
     public let defaultBranch: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case nodeId
+        case name
+        case `private` = "private"
+        case owner
+        /// public URL
+        case htmlUrl
+        case repoDescription = "description"
+        case fork
+        /// API URL
+        case url
+        case forksUrl
+        case keysUrl
+        case collaboratorsUrl
+        case teamsUrl
+        case hooksUrl
+        case issueEventsUrl
+        case eventsUrl
+        case assigneesUrl
+        case branchesUrl
+        case tagsUrl
+        case blobsUrl
+        case gitTagsUrl
+        case gitRefsUrl
+        case treesUrl
+        case statusesUrl
+        case languagesUrl
+        case stargazersUrl
+        case contributorsUrl
+        case subscribersUrl
+        case subscriptionUrl
+        case commitsUrl
+        case gitCommitsUrl
+        case commentsUrl
+        case issueCommentUrl
+        case contentsUrl
+        case compareUrl
+        case mergesUrl
+        case archiveUrl
+        case downloadsUrl
+        case issuesUrl
+        case pullsUrl
+        case milestonesUrl
+        case notificationsUrl
+        case labelsUrl
+        case releasesUrl
+        case deploymentsUrl
+        case createdAt
+        case pushedAt
+        case gitUrl
+        case sshUrl
+        case cloneUrl
+        case svnUrl
+        case homepage
+        case size
+        case stargazersCount
+        case watchersCount
+        case language
+        case hasIssues
+        case hasProjects
+        case hasDownloads
+        case hasWiki
+        case hasPages
+        case forksCount
+        case mirrorUrl
+        case archived
+        case disabled
+        case openIssuesCount
+        case license
+        case forks
+        case openIssues
+        case watchers
+        case defaultBranch
+    }
 }
 
 // MARK: - License -
@@ -164,4 +240,28 @@ public struct License: Codable {
     public let spdxId: String?
     public let url: URL?
     public let nodeId: String?
+}
+
+
+extension Repo: CustomStringConvertible {
+    public var description: String {
+        do {
+        let jsonEncoder = JSONEncoder()
+        let data = try jsonEncoder.encode(self)
+            return data.prettyPrintedJSONString ?? ""
+        } catch {
+            return error.localizedDescription
+        }
+    }
+}
+
+
+extension Data {
+    var prettyPrintedJSONString: String? { /// NSString gives us a nice sanitized debugDescription
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let prettyPrintedString = String(data: data, encoding: String.Encoding.utf8) else { return nil }
+
+        return prettyPrintedString
+    }
 }
