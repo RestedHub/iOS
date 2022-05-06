@@ -79,9 +79,9 @@ and
 ### Built With
 </div>
 
-* [https://swift.org/package-manager/](Swift Package Manager)
-* [https://developer.apple.com/xcode/](Xcode)
-* [https://swift.org/](Swift)
+* [Swift Package Manager](https://swift.org/package-manager/)
+* [Xcode](https://developer.apple.com/xcode/)
+* [Swift](https://swift.org/)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -117,8 +117,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@KennyDubroff](https://twitter.com/KennyDubroff) - kenny.dubroff@kennydubroff.com
-Project Link: [https://github.com/RestedHub/iOS](https://github.com/RestedHub/iOS)
+[@KennyDubroff](https://twitter.com/KennyDubroff) - kenny.dubroff@kennydubroff.com
+
+[https://github.com/RestedHub/iOS](https://github.com/RestedHub/iOS)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
